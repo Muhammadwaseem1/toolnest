@@ -1,18 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import JsonFormatter from "./tools/JsonFormatter";
-import Base64Tool from "./tools/Base64Tool";
-import UuidGenerator from "./tools/UuidGenerator";
-import ColorConverter from "./tools/ColorConverter";
-import LoremGenerator from "./tools/LoremGenerator";
+import dynamic from "next/dynamic";
+
+const JsonFormatter  = dynamic(() => import("./tools/JsonFormatter"),  { ssr: false });
+const Base64Tool     = dynamic(() => import("./tools/Base64Tool"),     { ssr: false });
+const UuidGenerator  = dynamic(() => import("./tools/UuidGenerator"),  { ssr: false });
+const ColorConverter = dynamic(() => import("./tools/ColorConverter"), { ssr: false });
+const LoremGenerator = dynamic(() => import("./tools/LoremGenerator"), { ssr: false });
 
 const TABS = [
   { id: "json",   label: "JSON",      icon: "{ }" },
   { id: "base64", label: "Base64",    icon: "B64" },
-  { id: "uuid",   label: "UUID",      icon: "⊞"   },
-  { id: "color",  label: "Color",     icon: "◉"   },
-  { id: "lorem",  label: "Lorem",     icon: "¶"   },
+  { id: "uuid",   label: "UUID",      icon: "\u229e"   },
+  { id: "color",  label: "Color",     icon: "\u25c9"   },
+  { id: "lorem",  label: "Lorem",     icon: "\u00b6"   },
 ];
 
 export default function Home() {
