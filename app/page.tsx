@@ -1,20 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
-
-const JsonFormatter  = dynamic(() => import("./tools/JsonFormatter"),  { ssr: false });
-const Base64Tool     = dynamic(() => import("./tools/Base64Tool"),     { ssr: false });
-const UuidGenerator  = dynamic(() => import("./tools/UuidGenerator"),  { ssr: false });
-const ColorConverter = dynamic(() => import("./tools/ColorConverter"), { ssr: false });
-const LoremGenerator = dynamic(() => import("./tools/LoremGenerator"), { ssr: false });
+import JsonFormatter from "./tools/JsonFormatter";
+import Base64Tool from "./tools/Base64Tool";
+import UuidGenerator from "./tools/UuidGenerator";
+import ColorConverter from "./tools/ColorConverter";
+import LoremGenerator from "./tools/LoremGenerator";
 
 const TABS = [
-  { id: "json",   label: "JSON",      icon: "{ }" },
-  { id: "base64", label: "Base64",    icon: "B64" },
-  { id: "uuid",   label: "UUID",      icon: "\u229e"   },
-  { id: "color",  label: "Color",     icon: "\u25c9"   },
-  { id: "lorem",  label: "Lorem",     icon: "\u00b6"   },
+  { id: "json",   label: "JSON",   icon: "{ }" },
+  { id: "base64", label: "Base64", icon: "B64" },
+  { id: "uuid",   label: "UUID",   icon: "⊞"   },
+  { id: "color",  label: "Color",  icon: "◉"   },
+  { id: "lorem",  label: "Lorem",  icon: "¶"   },
 ];
 
 export default function Home() {
@@ -22,7 +20,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "var(--bg)" }}>
-      {/* Header */}
       <header className="border-b px-6 py-4 flex items-center gap-3" style={{ borderColor: "var(--border)", background: "var(--surface)" }}>
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm"
@@ -36,7 +33,6 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Tab Bar */}
       <nav className="flex gap-1 px-6 pt-4 pb-0" style={{ background: "var(--surface)", borderBottom: "1px solid var(--border)" }}>
         {TABS.map((tab) => {
           const isActive = active === tab.id;
@@ -59,18 +55,16 @@ export default function Home() {
         })}
       </nav>
 
-      {/* Tool Panel */}
       <main className="flex-1 p-6" style={{ background: "var(--bg)" }}>
         <div className="max-w-5xl mx-auto">
-          {active === "json"   && <JsonFormatter />}
-          {active === "base64" && <Base64Tool />}
-          {active === "uuid"   && <UuidGenerator />}
-          {active === "color"  && <ColorConverter />}
-          {active === "lorem"  && <LoremGenerator />}
+          <div style={{ display: active === "json"   ? "block" : "none" }}><JsonFormatter /></div>
+          <div style={{ display: active === "base64" ? "block" : "none" }}><Base64Tool /></div>
+          <div style={{ display: active === "uuid"   ? "block" : "none" }}><UuidGenerator /></div>
+          <div style={{ display: active === "color"  ? "block" : "none" }}><ColorConverter /></div>
+          <div style={{ display: active === "lorem"  ? "block" : "none" }}><LoremGenerator /></div>
         </div>
       </main>
 
-      {/* Footer */}
       <footer className="text-center text-xs py-3" style={{ color: "var(--muted)", borderTop: "1px solid var(--border)" }}>
         ToolNest — everything a dev needs, nothing they don&apos;t
       </footer>
